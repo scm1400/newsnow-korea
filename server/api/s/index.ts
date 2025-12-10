@@ -24,8 +24,8 @@ export default defineEventHandler(async (event): Promise<SourceResponse> => {
       cache = await cacheTable.get(id)
       if (cache) {
       // if (cache) {
-        // interval 刷新间隔，对于缓存失效也要执行的。本质上表示本来内容更新就很慢，这个间隔内可能内容压根不会更新。
-        // 默认 10 分钟，是低于 TTL 的，但部分 Source 的更新间隔会超过 TTL，甚至有的一天更新一次。
+        // interval 새로고침 간격은 캐시가 만료되어도 실행된다.
+        // 기본 10분이며 TTL보다 짧지만 일부 Source는 더 긴 주기로만 갱신될 수 있다.
         if (now - cache.updated < sources[id].interval) {
           return {
             status: "success",
@@ -35,14 +35,14 @@ export default defineEventHandler(async (event): Promise<SourceResponse> => {
           }
         }
 
-        // 而 TTL 缓存失效时间，在时间范围内，就算内容更新了也要用这个缓存。
-        // 复用缓存是不会更新时间的。
+        // TTL 유효 시간 내에는 내용이 바뀌어도 캐시를 사용한다.
+        // 캐시를 재사용해도 updatedTime은 갱신되지 않는다.
         if (now - cache.updated < TTL) {
-          // 有 latest
-          // 没有 latest，但服务器禁止登录
+          // latest 있음
+          // latest 없음 + 서버 로그인 금지
 
-          // 没有 latest
-          // 有 latest，服务器可以登录但没有登录
+          // latest 없음
+          // latest 있음 + 서버 로그인 가능하지만 로그인하지 않음
           if (!latest || (!event.context.disabledLogin && !event.context.user)) {
             return {
               status: "cache",

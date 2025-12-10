@@ -1,11 +1,11 @@
 /**
- * 缓存过期时间
+ * 캐시 만료 시간
  */
 import packageJSON from "../package.json"
 
 export const TTL = 30 * 60 * 1000
 /**
- * 默认刷新间隔, 10 min
+ * 기본 새로고침 간격, 10분
  */
 export const Interval = 10 * 60 * 1000
 

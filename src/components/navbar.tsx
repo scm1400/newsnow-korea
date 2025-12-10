@@ -19,7 +19,7 @@ export function NavBar() {
           "cursor-pointer transition-all",
         )}
       >
-        更多
+        더보기
       </button>
       {fixedColumnIds.map(columnId => (
         <Link

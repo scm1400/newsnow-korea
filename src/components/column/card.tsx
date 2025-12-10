@@ -172,9 +172,9 @@ function NewsCard({ id, setHandleRef }: NewsCardProps) {
 
 function UpdatedTime({ isError, updatedTime }: { updatedTime: any, isError: boolean }) {
   const relativeTime = useRelativeTime(updatedTime ?? "")
-  if (relativeTime) return `${relativeTime}更新`
-  if (isError) return "获取失败"
-  return "加载中..."
+  if (relativeTime) return `${relativeTime} 업데이트`
+  if (isError) return "가져오기 실패"
+  return "불러오는 중..."
 }
 
 function DiffNumber({ diff }: { diff: number }) {

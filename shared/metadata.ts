@@ -3,26 +3,29 @@ import { typeSafeObjectEntries, typeSafeObjectFromEntries } from "./type.util"
 import type { ColumnID, HiddenColumnID, Metadata, SourceID } from "./types"
 
 export const columns = {
-  china: {
-    zh: "国内",
+  korea: {
+    zh: "국내",
   },
-  world: {
-    zh: "国际",
+  community: {
+    zh: "커뮤니티",
+  },
+  media: {
+    zh: "언론",
   },
   tech: {
-    zh: "科技",
+    zh: "테크",
   },
-  finance: {
-    zh: "财经",
+  world: {
+    zh: "국제",
   },
   focus: {
-    zh: "关注",
+    zh: "관심",
   },
   realtime: {
-    zh: "实时",
+    zh: "실시간",
   },
   hottest: {
-    zh: "最热",
+    zh: "인기",
   },
 } as const
 

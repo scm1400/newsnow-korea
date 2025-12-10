@@ -50,7 +50,7 @@ export function OverlayScrollbar({ disabled, children, options, events, defer, c
 
   return (
     <div ref={ref} {...props} className={$("overflow-auto scrollbar-hidden", className)}>
-      {/* 只能有一个 element */}
+      {/* 하나의 element만 허용 */}
       <div>{children}</div>
     </div>
   )

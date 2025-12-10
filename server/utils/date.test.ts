@@ -14,23 +14,23 @@ describe("parseRelativeDate", () => {
 
   const weekday = (d: number) => +new Date(date.getFullYear(), date.getMonth(), date.getDate() + d - (date.getDay() > d ? date.getDay() : date.getDay() + 7))
 
-  // 固定时间
+  // 기준 시간 고정
   MockDate.set(date)
 
-  it("s秒钟前", () => {
-    expect(+new Date(parseRelativeDate("10秒前"))).toBe(+date - 10 * second)
+  it("s초 전", () => {
+    expect(+new Date(parseRelativeDate("10초전"))).toBe(+date - 10 * second)
   })
 
-  it("m分钟前", () => {
-    expect(+new Date(parseRelativeDate("10分钟前"))).toBe(+date - 10 * minute)
+  it("m분 전", () => {
+    expect(+new Date(parseRelativeDate("10분전"))).toBe(+date - 10 * minute)
   })
 
-  it("m分鐘前", () => {
-    expect(+new Date(parseRelativeDate("10分鐘前"))).toBe(+date - 10 * minute)
+  it("m분 전(공백 포함)", () => {
+    expect(+new Date(parseRelativeDate("10분 전"))).toBe(+date - 10 * minute)
   })
 
-  it("m分钟后", () => {
-    expect(+new Date(parseRelativeDate("10分钟后"))).toBe(+date + 10 * minute)
+  it("m분 후", () => {
+    expect(+new Date(parseRelativeDate("10분후"))).toBe(+date + 10 * minute)
   })
 
   it("a minute ago", () => {
@@ -53,64 +53,64 @@ describe("parseRelativeDate", () => {
     expect(+new Date(parseRelativeDate("in an hour"))).toBe(+date + 1 * hour)
   })
 
-  it("h小时前", () => {
-    expect(+new Date(parseRelativeDate("10小时前"))).toBe(+date - 10 * hour)
+  it("h시간 전", () => {
+    expect(+new Date(parseRelativeDate("10시간전"))).toBe(+date - 10 * hour)
   })
 
-  it("h个小时前", () => {
-    expect(+new Date(parseRelativeDate("10个小时前"))).toBe(+date - 10 * hour)
+  it("h시간 전(공백 포함)", () => {
+    expect(+new Date(parseRelativeDate("10시간 전"))).toBe(+date - 10 * hour)
   })
 
-  it("d天前", () => {
-    expect(+new Date(parseRelativeDate("10天前"))).toBe(+date - 10 * day)
+  it("d일 전", () => {
+    expect(+new Date(parseRelativeDate("10일전"))).toBe(+date - 10 * day)
   })
 
-  it("w周前", () => {
-    expect(+new Date(parseRelativeDate("10周前"))).toBe(+date - 10 * week)
+  it("w주 전", () => {
+    expect(+new Date(parseRelativeDate("10주전"))).toBe(+date - 10 * week)
   })
 
-  it("w星期前", () => {
-    expect(+new Date(parseRelativeDate("10星期前"))).toBe(+date - 10 * week)
+  it("w주일 전", () => {
+    expect(+new Date(parseRelativeDate("10주일전"))).toBe(+date - 10 * week)
   })
 
-  it("w个星期前", () => {
-    expect(+new Date(parseRelativeDate("10个星期前"))).toBe(+date - 10 * week)
+  it("w주 전(공백 포함)", () => {
+    expect(+new Date(parseRelativeDate("10주 전"))).toBe(+date - 10 * week)
   })
 
-  it("m月前", () => {
-    expect(+new Date(parseRelativeDate("1月前"))).toBe(+date - 1 * month)
+  it("m달 전", () => {
+    expect(+new Date(parseRelativeDate("1달전"))).toBe(+date - 1 * month)
   })
 
-  it("m个月前", () => {
-    expect(+new Date(parseRelativeDate("1个月前"))).toBe(+date - 1 * month)
+  it("m개월 전", () => {
+    expect(+new Date(parseRelativeDate("1개월전"))).toBe(+date - 1 * month)
   })
 
-  it("y年前", () => {
-    expect(+new Date(parseRelativeDate("1年前"))).toBe(+date - 1 * year)
+  it("y년 전", () => {
+    expect(+new Date(parseRelativeDate("1년전"))).toBe(+date - 1 * year)
   })
 
-  it("y年M个月前", () => {
-    expect(+new Date(parseRelativeDate("1年1个月前"))).toBe(+date - 1 * year - 1 * month)
+  it("y년M개월 전", () => {
+    expect(+new Date(parseRelativeDate("1년1개월전"))).toBe(+date - 1 * year - 1 * month)
   })
 
-  it("d天H小时前", () => {
-    expect(+new Date(parseRelativeDate("1天1小时前"))).toBe(+date - 1 * day - 1 * hour)
+  it("d일H시간 전", () => {
+    expect(+new Date(parseRelativeDate("1일1시간전"))).toBe(+date - 1 * day - 1 * hour)
   })
 
-  it("h小时m分钟s秒钟前", () => {
-    expect(+new Date(parseRelativeDate("1小时1分钟1秒钟前"))).toBe(+date - 1 * hour - 1 * minute - 1 * second)
+  it("h시간m분s초 전", () => {
+    expect(+new Date(parseRelativeDate("1시간1분1초전"))).toBe(+date - 1 * hour - 1 * minute - 1 * second)
   })
 
   it("dd Hh mm ss ago", () => {
     expect(+new Date(parseRelativeDate("1d 1h 1m 1s ago"))).toBe(+date - 1 * day - 1 * hour - 1 * minute - 1 * second)
   })
 
-  it("h小时m分钟s秒钟后", () => {
-    expect(+new Date(parseRelativeDate("1小时1分钟1秒钟后"))).toBe(+date + 1 * hour + 1 * minute + 1 * second)
+  it("h시간m분s초 후", () => {
+    expect(+new Date(parseRelativeDate("1시간1분1초후"))).toBe(+date + 1 * hour + 1 * minute + 1 * second)
   })
 
-  it("今天", () => {
-    expect(+new Date(parseRelativeDate("今天"))).toBe(+date.setHours(0, 0, 0, 0))
+  it("오늘", () => {
+    expect(+new Date(parseRelativeDate("오늘"))).toBe(+date.setHours(0, 0, 0, 0))
   })
 
   it("today H:m", () => {
@@ -125,36 +125,36 @@ describe("parseRelativeDate", () => {
     expect(+new Date(parseRelativeDate("TDA 08:00:00"))).toBe(+date + 8 * hour)
   })
 
-  it("今天 H:m", () => {
-    expect(+new Date(parseRelativeDate("今天 08:00"))).toBe(+date + 8 * hour)
+  it("오늘 H:m", () => {
+    expect(+new Date(parseRelativeDate("오늘 08:00"))).toBe(+date + 8 * hour)
   })
 
-  it("今天H点m分", () => {
-    expect(+new Date(parseRelativeDate("今天8点0分"))).toBe(+date + 8 * hour)
+  it("오늘H시m분", () => {
+    expect(+new Date(parseRelativeDate("오늘8시0분"))).toBe(+date + 8 * hour)
   })
 
-  it("昨日H点m分s秒", () => {
-    expect(+new Date(parseRelativeDate("昨日20时0分0秒"))).toBe(+date - 4 * hour)
+  it("어제H시m분s초", () => {
+    expect(+new Date(parseRelativeDate("어제20시0분0초"))).toBe(+date - 4 * hour)
   })
 
-  it("前天 H:m", () => {
-    expect(+new Date(parseRelativeDate("前天 20:00"))).toBe(+date - 1 * day - 4 * hour)
+  it("그제 H:m", () => {
+    expect(+new Date(parseRelativeDate("그제 20:00"))).toBe(+date - 1 * day - 4 * hour)
   })
 
-  it("明天 H:m", () => {
-    expect(+new Date(parseRelativeDate("明天 20:00"))).toBe(+date + 1 * day + 20 * hour)
+  it("내일 H:m", () => {
+    expect(+new Date(parseRelativeDate("내일 20:00"))).toBe(+date + 1 * day + 20 * hour)
   })
 
-  it("星期几 h:m", () => {
-    expect(+new Date(parseRelativeDate("星期一 8:00"))).toBe(weekday(1) + 8 * hour)
+  it("요일 h:m", () => {
+    expect(+new Date(parseRelativeDate("월요일 8:00"))).toBe(weekday(1) + 8 * hour)
   })
 
-  it("周几 h:m", () => {
-    expect(+new Date(parseRelativeDate("周二 8:00"))).toBe(weekday(2) + 8 * hour)
+  it("요일(대체) h:m", () => {
+    expect(+new Date(parseRelativeDate("화요일 8:00"))).toBe(weekday(2) + 8 * hour)
   })
 
-  it("星期天 h:m", () => {
-    expect(+new Date(parseRelativeDate("星期天 8:00"))).toBe(weekday(7) + 8 * hour)
+  it("일요일 h:m", () => {
+    expect(+new Date(parseRelativeDate("일요일 8:00"))).toBe(weekday(7) + 8 * hour)
   })
 
   it("invalid", () => {

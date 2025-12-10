@@ -1,204 +1,136 @@
-# Contributing to NewsNow
+# NewsNow 한국어판 기여 가이드
 
-Thank you for considering contributing to NewsNow! This document provides guidelines and instructions for contributing to the project.
+NewsNow 한국어판에 기여해 주셔서 감사합니다. 이 문서는 새 소스 추가부터 PR 제출까지의 절차를 안내합니다.
 
-## Adding a New Source
+## 새 소스 추가 절차
 
-NewsNow is built to be easily extensible with new sources. Here's a step-by-step guide on how to add a new source:
-
-### 1. Create a Feature Branch
-
-Always create a feature branch for your changes:
-
+### 1. 브랜치 생성
 ```bash
 git checkout -b feature-name
 ```
+예) `git checkout -b bilibili-hot-video`
 
-For example, to add a Bilibili hot video source:
-
-```bash
-git checkout -b bilibili-hot-video
-```
-
-### 2. Register the Source in Configuration
-
-Add your new source to the source configuration in `/shared/pre-sources.ts`:
-
+### 2. 소스 등록 (`/shared/pre-sources.ts`)
 ```typescript
 "bilibili": {
-  name: "哔哩哔哩",
+  name: "빌리빌리",
   color: "blue",
   home: "https://www.bilibili.com",
   sub: {
     "hot-search": {
-      title: "热搜",
-      column: "china",
-      type: "hottest"
+      title: "실시간 검색",
+      column: "world",
+      type: "hottest",
     },
-    "hot-video": {  // Add your new sub-source here
-      title: "热门视频",
-      column: "china",
-      type: "hottest"
-    }
-  }
+    "hot-video": { // 새 하위 소스 추가
+      title: "인기 동영상",
+      column: "world",
+      type: "hottest",
+    },
+  },
 };
 ```
 
-For a completely new source, add a new top-level entry:
-
+완전히 새로운 소스를 추가할 때:
 ```typescript
 "newsource": {
-  name: "New Source",
+  name: "새 소스",
   color: "blue",
   home: "https://www.example.com",
-  column: "tech", // Pick an appropriate column
-  type: "hottest" // Or "realtime" if it's a news feed
+  column: "tech",   // 알맞은 컬럼 지정
+  type: "hottest",  // 실시간 피드라면 "realtime"
 };
 ```
 
-### 3. Implement the Source Fetcher
-
-Create or modify a file in the `/server/sources/` directory. If your source is related to an existing one (like adding a new Bilibili sub-source), modify the existing file:
-
+### 3. 소스 페처 구현 (`/server/sources/`)
+관련 파일을 만들거나 기존 파일을 수정합니다.
 ```typescript
-// In /server/sources/bilibili.ts
-
-// Define interface for API response
+// /server/sources/bilibili.ts
 interface HotVideoRes {
-  code: number;
-  message: string;
-  ttl: number;
-  data: {
-    list: {
-      aid: number;
-      // ... other fields
-      bvid: string;
-      title: string;
-      pubdate: number;
-      desc: string;
-      pic: string;
-      owner: {
-        mid: number;
-        name: string;
-        face: string;
-      };
-      stat: {
-        view: number;
-        like: number;
-        reply: number;
-        // ... other stats
-      };
-    }[];
-  };
+  data: { list: Array<{
+    bvid: string;
+    title: string;
+    pubdate: number;
+    desc: string;
+    pic: string;
+    owner: { name: string };
+    stat: { view: number; like: number };
+  }>};
 }
 
-// Define source getter function
 const hotVideo = defineSource(async () => {
-  const url = "https://api.bilibili.com/x/web-interface/popular";
-  const res: HotVideoRes = await myFetch(url);
-
-  return res.data.list.map((video) => ({
+  const res: HotVideoRes = await myFetch("https://api.bilibili.com/x/web-interface/popular");
+  return res.data.list.map(video => ({
     id: video.bvid,
     title: video.title,
     url: `https://www.bilibili.com/video/${video.bvid}`,
     pubDate: video.pubdate * 1000,
     extra: {
-      info: `${video.owner.name} · ${formatNumber(video.stat.view)}观看 · ${formatNumber(video.stat.like)}点赞`,
+      info: `${video.owner.name} · ${formatNumber(video.stat.view)}회 · ${formatNumber(video.stat.like)}좋아요`,
       hover: video.desc,
       icon: proxyPicture(video.pic),
     },
   }));
 });
 
-// Helper function for formatting numbers
 function formatNumber(num: number): string {
-  if (num >= 10000) {
-    return `${Math.floor(num / 10000)}w+`;
-  }
+  if (num >= 10000) return `${Math.floor(num / 10000)}w+`;
   return num.toString();
 }
 
-// Export the source
 export default defineSource({
   bilibili: hotSearch,
   "bilibili-hot-search": hotSearch,
-  "bilibili-hot-video": hotVideo, // Add your new source here
+  "bilibili-hot-video": hotVideo,
 });
 ```
 
-For completely new sources, create a new file in `/server/sources/` named after your source (e.g., `newsource.ts`).
-
-### 4. Regenerate Source Files
-
-After adding or modifying source files, run the following command to regenerate the necessary files:
-
+### 4. 소스 파일 재생성
 ```bash
-npm run presource
+pnpm run presource
 ```
+`sources.json` 등 관련 설정이 갱신됩니다.
 
-This will update the `sources.json` file and any other necessary configuration.
-
-### 5. Test Your Changes
-
-Start the development server to test your changes:
-
+### 5. 로컬 테스트
 ```bash
-npm run dev
+pnpm dev
 ```
+브라우저에서 새 소스가 정상 노출·동작하는지 확인합니다.
 
-Access the application in your browser and ensure that your new source is appearing and working correctly.
-
-### 6. Commit Your Changes
-
-Once everything is working, commit your changes:
-
+### 6. 커밋
 ```bash
 git add .
 git commit -m "Add new source: source-name"
 ```
 
-### 7. Create a Pull Request
-
-Push your changes to your fork and create a pull request against the main repository:
-
+### 7. PR 생성
 ```bash
 git push origin feature-name
 ```
+메인 저장소로 Pull Request를 생성합니다.
 
-## Source Structure
-
-### NewsItem Structure
-
-Each source should return an array of objects that conform to the `NewsItem` interface:
-
+## 소스 반환 형태 (NewsItem)
+각 소스는 아래 형태의 배열을 반환해야 합니다.
 ```typescript
 interface NewsItem {
-  id: string | number; // Unique identifier for the item
-  title: string; // Title of the news item
-  url: string; // URL to the full content
-  mobileUrl?: string; // Optional mobile-specific URL
-  pubDate?: number | string; // Publication date
+  id: string | number;    // 고유 ID
+  title: string;          // 제목
+  url: string;            // 본문 링크
+  mobileUrl?: string;     // 선택: 모바일 전용 링크
+  pubDate?: number | string; // 발행 시각
   extra?: {
-    hover?: string; // Text to display on hover
-    date?: number | string; // Formatted date
-    info?: false | string; // Additional information
-    diff?: number; // Time difference
-    icon?:
-      | false
-      | string
-      | {
-          // Icon for the item
-          url: string;
-          scale: number;
-        };
+    hover?: string;
+    date?: number | string;
+    info?: false | string;
+    diff?: number;
+    icon?: false | string | { url: string; scale: number; };
   };
 }
 ```
 
-## Code Style
+## 코드 스타일
+- TypeScript/ES6+ 컨벤션을 따릅니다.
+- 기존 코드의 포맷과 패턴을 맞춰 주세요.
 
-Please follow the existing code style in the project. The project uses TypeScript and follows modern ES6+ conventions.
-
-## License
-
-By contributing to this project, you agree that your contributions will be licensed under the project's license.
+## 라이선스
+이 프로젝트에 기여하면, 해당 기여물은 프로젝트 라이선스(MIT)에 따라 제공됨에 동의하는 것으로 간주됩니다.
