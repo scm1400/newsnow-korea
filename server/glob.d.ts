@@ -15,7 +15,7 @@ declare module 'glob:./sources/{*.ts,**/index.ts}' {
   export const khan: typeof import('./sources/khan')
   export const mbc: typeof import('./sources/mbc')
   export const naver: typeof import('./sources/naver')
-  export const ppomppu: typeof import('./sources/ppomppu')
+  // export const ppomppu: typeof import('./sources/ppomppu')
   export const ruliweb: typeof import('./sources/ruliweb')
   export const sbs: typeof import('./sources/sbs')
   export const steam: typeof import('./sources/steam')

@@ -14,7 +14,7 @@ const Time = {
 
 export const originSources = {
   // === 뉴스 포털 ===
-  "naver": {
+  naver: {
     name: "네이버 뉴스",
     title: "실시간 랭킹",
     type: "hottest",
@@ -23,7 +23,7 @@ export const originSources = {
     interval: Time.Fast,
     home: "https://news.naver.com",
   },
-  "daum": {
+  daum: {
     name: "다음 뉴스",
     title: "실시간 랭킹",
     type: "hottest",
@@ -34,7 +34,7 @@ export const originSources = {
   },
 
   // === 커뮤니티 ===
-  "dcinside": {
+  dcinside: {
     name: "디시인사이드",
     title: "실시간 베스트",
     type: "hottest",
@@ -43,7 +43,7 @@ export const originSources = {
     interval: Time.Fast,
     home: "https://dcinside.com",
   },
-  "clien": {
+  clien: {
     name: "클리앙",
     title: "모아보기",
     type: "hottest",
@@ -52,7 +52,7 @@ export const originSources = {
     interval: Time.Fast,
     home: "https://clien.net",
   },
-  "ruliweb": {
+  ruliweb: {
     name: "루리웹",
     title: "베스트",
     type: "hottest",
@@ -61,17 +61,17 @@ export const originSources = {
     interval: Time.Fast,
     home: "https://ruliweb.com",
   },
-  "ppomppu": {
-    name: "뽐뿌",
-    title: "핫딜",
-    type: "hottest",
-    column: "community",
-    color: "red",
-    interval: Time.Fast,
-    home: "https://ppomppu.co.kr",
-  },
+  // "ppomppu": {
+  //   name: "뽐뿌",
+  //   title: "핫딜",
+  //   type: "hottest",
+  //   column: "community",
+  //   color: "red",
+  //   interval: Time.Fast,
+  //   home: "https://ppomppu.co.kr",
+  // },
   // === 언론사 ===
-  "chosun": {
+  chosun: {
     name: "조선일보",
     type: "realtime",
     column: "media",
@@ -79,7 +79,7 @@ export const originSources = {
     interval: Time.Common,
     home: "https://chosun.com",
   },
-  "joongang": {
+  joongang: {
     name: "중앙일보",
     type: "realtime",
     column: "media",
@@ -87,7 +87,7 @@ export const originSources = {
     interval: Time.Common,
     home: "https://joongang.co.kr",
   },
-  "donga": {
+  donga: {
     name: "동아일보",
     type: "realtime",
     column: "media",
@@ -95,7 +95,7 @@ export const originSources = {
     interval: Time.Common,
     home: "https://donga.com",
   },
-  "hani": {
+  hani: {
     name: "한겨레",
     type: "realtime",
     column: "media",
@@ -103,7 +103,7 @@ export const originSources = {
     interval: Time.Common,
     home: "https://hani.co.kr",
   },
-  "khan": {
+  khan: {
     name: "경향신문",
     type: "realtime",
     column: "media",
@@ -111,7 +111,7 @@ export const originSources = {
     interval: Time.Common,
     home: "https://khan.co.kr",
   },
-  "sbs": {
+  sbs: {
     name: "SBS 뉴스",
     type: "realtime",
     column: "media",
@@ -119,7 +119,7 @@ export const originSources = {
     interval: Time.Common,
     home: "https://news.sbs.co.kr",
   },
-  "kbs": {
+  kbs: {
     name: "KBS 뉴스",
     type: "realtime",
     column: "media",
@@ -127,7 +127,7 @@ export const originSources = {
     interval: Time.Common,
     home: "https://news.kbs.co.kr",
   },
-  "mbc": {
+  mbc: {
     name: "MBC 뉴스",
     type: "realtime",
     column: "media",
@@ -135,7 +135,7 @@ export const originSources = {
     interval: Time.Common,
     home: "https://www.imbc.com",
   },
-  "jtbc": {
+  jtbc: {
     name: "JTBC 뉴스",
     type: "realtime",
     column: "media",
@@ -143,7 +143,7 @@ export const originSources = {
     interval: Time.Common,
     home: "https://news.jtbc.co.kr",
   },
-  "yonhap": {
+  yonhap: {
     name: "연합뉴스",
     type: "realtime",
     column: "media",
@@ -153,14 +153,14 @@ export const originSources = {
   },
 
   // === 국제/기술 (유지) ===
-  "hackernews": {
+  hackernews: {
     name: "Hacker News",
     color: "orange",
     column: "tech",
     type: "hottest",
     home: "https://news.ycombinator.com/",
   },
-  "github": {
+  github: {
     name: "Github",
     color: "gray",
     home: "https://github.com/",
@@ -172,7 +172,7 @@ export const originSources = {
       },
     },
   },
-  "steam": {
+  steam: {
     name: "Steam",
     column: "world",
     title: "플레이어 수",

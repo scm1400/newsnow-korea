@@ -4,6 +4,11 @@
 
 한국어 사용자에 맞춰 현지화된 NewsNow입니다. 실시간·인기 뉴스를 깔끔한 UI로 모아 읽을 수 있으며, GitHub 로그인 기반 동기화와 캐시·스크래핑 최적화를 제공합니다.
 
+## 미리보기
+
+![NewsNow 미리보기1](/screenshots/preview-1.png)
+![NewsNow 미리보기2](/screenshots/preview-2.png)
+
 ## 주요 특징
 
 - 깔끔한 다크 기본 UI와 반응형 레이아웃
@@ -64,7 +69,7 @@ ENABLE_CACHE=true
 ```
 
 ### 데이터베이스
-지원 커넥터: https://db0.unjs.io/connectors  
+지원 커넥터: https://db0.unjs.io/connectors
 권장: **Cloudflare D1**
 
 1. Cloudflare Worker 대시보드에서 D1 DB 생성
