@@ -44,15 +44,6 @@
     "color": "blue",
     "interval": 300000
   },
-  "ppomppu": {
-    "title": "핫딜",
-    "name": "뽐뿌",
-    "type": "hottest",
-    "column": "community",
-    "home": "https://ppomppu.co.kr",
-    "color": "red",
-    "interval": 300000
-  },
   "chosun": {
     "name": "조선일보",
     "type": "realtime",
